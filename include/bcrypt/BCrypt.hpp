@@ -25,6 +25,22 @@ public:
     static bool validatePassword(const std::string & password, const std::string & hash){
         return (bcrypt_checkpw(password.c_str(), hash.c_str()) == 0);
     }
+
+    /**
+     * Generate SALT.
+     *
+     * @param salt empty string to populate with salt
+     * @param workfactor workfactor to use in the algorithm
+     * @return True on success, false on failure
+     */
+    static bool generateSalt(std::string &salt, int workfactor=12) {
+		char _salt[BCRYPT_HASHSIZE];
+		if (bcrypt_gensalt(workfactor, _salt)) {
+			return false;
+		}
+		salt = _salt;
+		return true;
+    }
 };
 
 #endif

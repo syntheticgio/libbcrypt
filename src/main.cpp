@@ -14,6 +14,10 @@ int main(){
 
 	std::cout << "checking wrong password: " << std::flush
 			  << BCrypt::validatePassword(wrong_password,hash) << std::endl;
+	std::string salt;
+	BCrypt::generateSalt(salt);
+
+	std::cout << "Generate a salt: " << salt << std::endl;
 
 	return 0;
 }
